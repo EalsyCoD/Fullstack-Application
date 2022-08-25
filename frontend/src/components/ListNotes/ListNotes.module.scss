@@ -1,0 +1,9 @@
+.container {
+  background-color: azure;
+  width: 30em;
+}
+
+.title {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}

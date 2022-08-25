@@ -1,13 +1,26 @@
-import React from 'react'
+import React from "react";
 
-function App() {
+import { Form, ListNotes } from "./components";
+
+import s from "./App.module.scss";
+import { useDispatch } from "react-redux";
+import { setNotes } from "./store/actions/NotesAction";
+
+const App = () => {
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(setNotes());
+  }, []);
+
   return (
-    <div className='App'>
-      <p>
-        Edit <code>src/App.tsx</code> and save to reload.
-      </p>
-    </div>
-  )
-}
+    <>
+      <div className={s.container}>
+        <ListNotes />
+        <Form />
+      </div>
+    </>
+  );
+};
 
-export default App
+export default App;
