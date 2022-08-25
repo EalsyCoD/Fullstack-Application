@@ -1,5 +1,4 @@
 import express, { Request, Response } from "express";
-import { matchSorter } from "match-sorter";
 import { WhereOptions } from "sequelize/types";
 import { v4 as uuidv4 } from "uuid";
 import { Notes, NotesInstance } from "../model";
