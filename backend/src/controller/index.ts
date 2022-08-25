@@ -1,7 +1,8 @@
 import express, { Request, Response } from "express";
+import { matchSorter } from "match-sorter";
 import { WhereOptions } from "sequelize/types";
 import { v4 as uuidv4 } from "uuid";
-import { NotesInstance } from "../model";
+import { Notes, NotesInstance } from "../model";
 
 class NoteController {
   async create(req: Request, res: Response) {
@@ -30,7 +31,28 @@ class NoteController {
       });
       return res.json(records);
     } catch (err) {
-      return res.json({ msg: "failt to read", status: 500, route: "/read" });
+      return res.json({ msg: "faile to read", status: 500, route: "/read" });
+    }
+  }
+  async getSort(req: Request, res: Response) {
+    try {
+      const order = req.query.order as any;
+      const records = await NotesInstance.findAll({
+        where: {} as WhereOptions,
+      });
+      if (order === "asc") {
+        const arr = records.sort((a: any, b: any) =>
+          a.createdAt > b.createdAt ? 1 : -1
+        );
+        return res.json(arr);
+      } else if (order === "dsc") {
+        const arr = records.sort((a: any, b: any) =>
+          a.createdAt < b.createdAt ? 1 : -1
+        );
+        return res.json(arr);
+      }
+    } catch (err) {
+      return res.json({ msg: "faile to read", status: 500, route: "/getsort" });
     }
   }
   async readById(req: Request, res: Response) {
@@ -41,7 +63,11 @@ class NoteController {
       });
       return res.json(result);
     } catch (err) {
-      return res.json({ msg: "fail to read", status: 500, route: "/read/:id" });
+      return res.json({
+        msg: "faile to read",
+        status: 500,
+        route: "/read/:id",
+      });
     }
   }
   async update(req: Request, res: Response) {
@@ -60,7 +86,7 @@ class NoteController {
       return res.json({ updatedRecord });
     } catch (err) {
       return res.json({
-        msg: "fail to read",
+        msg: "faile to read",
         status: 500,
         route: "/update/:id",
       });
@@ -80,7 +106,7 @@ class NoteController {
       return res.json({ record: deleteRecord });
     } catch (err) {
       return res.json({
-        msg: "fail to read",
+        msg: "faile to read",
         status: 500,
         route: "/delete/:id",
       });

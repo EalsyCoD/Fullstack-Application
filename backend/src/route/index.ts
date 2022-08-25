@@ -9,6 +9,8 @@ router.get("/read", NoteController.readPagination);
 
 router.get("/read/:id", NoteController.readById);
 
+router.get("/getsort", NoteController.getSort);
+
 router.put("/update/:id", NoteController.update);
 
 router.delete("/delete/:id", NoteController.delete);

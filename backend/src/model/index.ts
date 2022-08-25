@@ -1,11 +1,17 @@
 import { Model, DataTypes } from "sequelize";
 import db from "../config/database.config";
 
-interface NotesTypes {
+export interface NotesTypes {
   id: string;
   title: string;
   description: number;
-  date: string;
+  date: Date;
+}
+
+export interface Notes {
+  title: string;
+  description: number;
+  createdAt: string;
 }
 
 export class NotesInstance extends Model<NotesTypes> {}
@@ -26,7 +32,7 @@ NotesInstance.init(
       allowNull: false,
     },
     date: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.STRING,
       allowNull: false,
     },
   },

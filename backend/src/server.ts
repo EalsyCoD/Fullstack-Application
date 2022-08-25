@@ -3,7 +3,7 @@
 import express from "express";
 
 import db from "./config/database.config";
-
+const corsMiddleware = require("./middleware/cors.middleware");
 import noteRouter from "./route";
 
 db.sync().then(() => {
@@ -14,6 +14,7 @@ const app = express();
 const port = 3001;
 
 app.use(express.json());
+app.use(corsMiddleware);
 
 app.use("/api", noteRouter);
 
