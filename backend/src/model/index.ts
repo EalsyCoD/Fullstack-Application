@@ -6,12 +6,7 @@ export interface NotesTypes {
   title: string;
   description: number;
   date: Date;
-}
-
-export interface Notes {
-  title: string;
-  description: number;
-  createdAt: string;
+  createdAt?: string;
 }
 
 export class NotesInstance extends Model<NotesTypes> {}

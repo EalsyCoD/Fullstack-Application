@@ -1,7 +1,8 @@
 import express, { Request, Response } from "express";
 import { WhereOptions } from "sequelize/types";
 import { v4 as uuidv4 } from "uuid";
-import { Notes, NotesInstance } from "../model";
+import { NotesInstance, NotesTypes } from "../model";
+
 class NoteController {
   async create(req: Request, res: Response) {
     const id = uuidv4();
@@ -39,15 +40,19 @@ class NoteController {
         where: {} as WhereOptions,
       });
       if (order === "asc") {
-        const arr = records.sort((a: any, b: any) =>
-          a.createdAt > b.createdAt ? 1 : -1
-        );
-        return res.json(arr);
+        const arr = (records: NotesTypes[]) =>
+          records.sort((a: NotesTypes, b: NotesTypes) =>
+            (a.createdAt as string) > (b.createdAt as string) ? 1 : -1
+          );
+        const sortBy = arr(records as []);
+        return res.json(sortBy);
       } else if (order === "dsc") {
-        const arr = records.sort((a: any, b: any) =>
-          a.createdAt < b.createdAt ? 1 : -1
-        );
-        return res.json(arr);
+        const arr = (records: NotesTypes[]) =>
+          records.sort((a: NotesTypes, b: NotesTypes) =>
+            (a.createdAt as string) < (b.createdAt as string) ? 1 : -1
+          );
+        const sortBy = arr(records as []);
+        return res.json(sortBy);
       }
     } catch (err) {
       return res.json({ msg: "faile to read", status: 500, route: "/getsort" });
