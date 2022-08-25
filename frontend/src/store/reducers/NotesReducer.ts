@@ -5,6 +5,7 @@ const initialState: NotesState = [
     id: 0,
     title: "",
     description: "",
+    date: "",
     createdAt: "",
   },
 ];

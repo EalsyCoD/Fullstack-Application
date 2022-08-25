@@ -2,7 +2,6 @@ import express, { Request, Response } from "express";
 import { WhereOptions } from "sequelize/types";
 import { v4 as uuidv4 } from "uuid";
 import { Notes, NotesInstance } from "../model";
-
 class NoteController {
   async create(req: Request, res: Response) {
     const id = uuidv4();
@@ -35,7 +34,7 @@ class NoteController {
   }
   async getSort(req: Request, res: Response) {
     try {
-      const order = req.query.order as any;
+      const order = req.query.order as string | undefined;
       const records = await NotesInstance.findAll({
         where: {} as WhereOptions,
       });

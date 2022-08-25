@@ -1,6 +1,7 @@
 import { AnyAction } from "redux";
 import { ThunkAction } from "redux-thunk";
 import axios from "axios";
+
 import { NewForm, NotesState, RootState } from "../types";
 
 const baseUrl: string = "http://localhost:3001/api/";

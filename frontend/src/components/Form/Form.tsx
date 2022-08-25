@@ -1,8 +1,9 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { Input } from "../Input";
+
 import { setForm } from "src/store/actions/FormAction";
 import { setNotes } from "src/store/actions/NotesAction";
-import { Input } from "../Input";
 
 import s from "./Form.module.scss";
 
